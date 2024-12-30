@@ -22,7 +22,7 @@ This is the backend service for the Bookstore project, built using Spring Boot. 
 - **Hibernate/JPA**
 - **MySQL**
 - **Maven**
-- **Java 17**
+- **Java 21**
 
 ## Prerequisites
 - Java 21
