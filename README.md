@@ -25,7 +25,7 @@ This is the backend service for the Bookstore project, built using Spring Boot. 
 - **Java 17**
 
 ## Prerequisites
-- Java 17
+- Java 21
 - Maven 3.8+
 - MySQL Server
 
