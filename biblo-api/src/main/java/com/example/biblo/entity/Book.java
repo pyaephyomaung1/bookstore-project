@@ -21,7 +21,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Getter @Setter 
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Book {
@@ -38,13 +39,26 @@ public class Book {
     @Column(nullable = false)
     private String bookCover;
     @ManyToOne
-    @JoinColumn(name = "author_id" , nullable = false)
+    @JoinColumn(name = "author_id", nullable = false)
     private Author author;
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(
-        name = "book_category",
-        joinColumns = @JoinColumn(name = "book_id"),
-        inverseJoinColumns = @JoinColumn(name = "category_id")
-    )
+    @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    @JoinTable(name = "book_category", joinColumns = @JoinColumn(name = "book_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories = new HashSet<>();
+
+    public void addCategory(Category category) {
+        this.categories.add(category);
+        category.getBooks().add(this);
+    }
+
+    public void removeCategory(Category category) {
+        this.categories.remove(category);
+        category.getBooks().remove(this);
+    }
+
+    public void clearCategories() {
+        for (Category category : new HashSet<>(this.categories)) {
+            removeCategory(category);
+        }
+    }
+
 }

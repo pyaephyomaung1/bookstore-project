@@ -3,6 +3,7 @@ package com.example.biblo.controller;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,5 +33,14 @@ public class BookStoreController {
     @GetMapping("/categories")
     public List<CategoryDTO> getCategories() {
         return bookStoreService.getCategories();
+    }
+
+    @PostMapping("/authors/store")
+    public AuthorDTO createAuthor(AuthorDTO authorDTO) {
+        return bookStoreService.createAuthor(authorDTO);
+    }
+    @PostMapping("/books/store")
+    public BookDTO createBook(BookDTO bookDTO) {
+        return bookStoreService.createBook(bookDTO);
     }
 }
